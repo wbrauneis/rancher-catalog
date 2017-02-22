@@ -1,0 +1,5 @@
+name: Jenkins Seed
+description: |
+  Jenkins CI server with additional git based seed job.
+version: 2.19.4-rancher1
+category: Continuous Integration

@@ -1,0 +1,25 @@
+jenkins-primary:
+  image: "jenkins:2.19.4"
+  ports:
+    - "${PORT}:8080"
+  labels:
+    io.rancher.sidekicks: jenkins-plugins,jenkins-datavolume,jenkins-seed
+    io.rancher.container.hostname_override: container_name
+    io.rancher_haproxy.exposed_port: ${PORT}
+    io.rancher_haproxy.server_names: ${dns_name}
+  volumes_from:
+    - jenkins-seed
+    - jenkins-plugins
+    - jenkins-datavolume
+  entrypoint: /usr/share/jenkins/rancher-seed/jenkins.sh
+jenkins-plugins:
+  image: rancher/jenkins-plugins:v0.1.1
+jenkins-datavolume:
+  image: "busybox"
+  volumes:
+    - ${volume_work}:/var/jenkins_home
+  labels:
+    io.rancher.container.start_once: true
+  entrypoint: ["chown", "-R", "1000:1000", "/var/jenkins_home"]
+jenkins-seed:
+  image: wbrauneis/rancher-jenkins-seed
