@@ -3,7 +3,6 @@ jenkins-primary:
   ports:
     - "${PORT}:8080"
   labels:
-    io.rancher.sidekicks: jenkins-plugins,jenkins-seed
     io.rancher.sidekicks: jenkins-plugins,jenkins-datavolume,jenkins-seed
     io.rancher.container.hostname_override: container_name
     io.rancher_haproxy.exposed_port: ${PORT}
