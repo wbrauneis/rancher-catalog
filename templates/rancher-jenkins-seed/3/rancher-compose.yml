@@ -82,7 +82,6 @@
     description: |
       List of Jenkins environment variables.
     label: "Jenkins Environment"
-    required: false
     default: | 
       KEY=value
     type: "multiline"
