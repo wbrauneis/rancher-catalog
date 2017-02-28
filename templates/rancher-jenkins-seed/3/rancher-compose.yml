@@ -79,10 +79,13 @@
       ssh-slaves
       swarm
   - variable: "jenkinsenv"
-    type: "multiline"
-    label: "Jenkins Environment"
     description: |
       List of Jenkins environment variables.
+    label: "Jenkins Environment"
+    required: true
+    default: | 
+      KEY=value
+    type: "multiline"
 jenkins-primary:
   metadata:
     plugins: |
