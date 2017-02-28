@@ -1,0 +1,101 @@
+.catalog:
+  name: Jenkins
+  version: 2.19.4-rancher4
+  description: |
+    Jenkins CI management server.
+  questions:
+  - variable: "PORT"
+    type: "int"
+    label: "Port Number"
+    description: "Which port should Jenkins listen on?"
+    default: 8080
+    required: true
+  - variable: "volume_work"
+    description: "Work volume to save jenkins data"
+    label: "Work volume:"
+    required: true
+    default: "/var/lib/docker/jenkins-ci"
+    type: "string"
+  - variable: "ldapserver"
+    description: "LDAP Server"
+    label: "LDAP Server:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "ldaprootdn"
+    description: "LDAP RootDN"
+    label: "LDAP RootDN:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "scmurl"
+    description: "SCM Url"
+    label: "SCM Url:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "scmpath"
+    description: "SCM Path"
+    label: "SCM Path:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "scmusername"
+    description: "SCM Username"
+    label: "SCM Username:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "scmidrsakey"
+    description: "SCM Key"
+    label: "SCM Key:"
+    required: true
+    default: "..."
+    type: "multiline"
+  - variable: "dns_name"
+    description: "DNS Name"
+    label: "DNS Name:"
+    required: true
+    default: "..."
+    type: "string"
+  - variable: "plugins"
+    type: "multiline"
+    label: "List of Plugins"
+    description: |
+      List of plugins in the format <plugin_name>[:<version>]
+      one entry per line.
+    default: |
+      credentials
+      git
+      git-client
+      github
+      github-api
+      github-oauth
+      greenballs
+      junit
+      plain-credentials
+      scm-api
+      ssh-credentials
+      ssh-slaves
+      swarm
+  - variable: "jenkinsenv"
+    type: "multiline"
+    label: "Jenkins Environment"
+    description: |
+      List of Jenkins environment variables.
+jenkins-primary:
+  metadata:
+    plugins: |
+      ${plugins}
+    seed:
+      ldapserver: ${ldapserver}
+      ldaprootdn: ${ldaprootdn}
+      scmurl: ${scmurl}
+      scmpath: ${scmpath}
+      scmusername: ${scmusername}
+      scmidrsakey: |
+        ${scmidrsakey}
+    jenkinsenv: |
+      ${jenkinsenv}
+
+
